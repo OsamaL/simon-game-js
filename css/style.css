@@ -1,4 +1,4 @@
-body{
+body {
   margin: 0;
   padding: 0;
   background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/prism.png);
@@ -54,7 +54,6 @@ body{
   position: absolute;
   background: #330000;
   color: red;
-  background-color: grey;
   font-family: courier;
   font-size: 20px;
   height: 30px;
