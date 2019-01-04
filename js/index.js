@@ -20,14 +20,25 @@ function shade(color, percent){
     if (color.length > 7 ) return shadeRGBColor(color,percent);
     else return shadeColor2(color,percent);
 }
+let order = [];
+let playerOrder = [];
+let flash;
+let turn;
+let good;
+let compTurn;
+let intervalId;
+let strict = false;
+let noise = true;
+let hard = false;
+let turnLimit = 5;
+let on = false;
+let win;
 
-var numberOfTiles = window.prompt("Please enter the number of tiles you want to play with: ", 3);
 
-var angleAtTip = 360.0 / numberOfTiles;
+let numberOfTiles = window.prompt("Please enter the number of tiles you want to play with: ", 3);
+let angleAtTip = 360.0 / numberOfTiles;
+let parent = document.getElementById("center");
 
-var array = ["darkred", "darkgreen"];
-
-var parent = document.getElementById("center");
 for(i = 0; i < numberOfTiles; i++){
   let tile = document.createElement("div");
   tile.style.position = "absolute";
@@ -45,17 +56,7 @@ for(i = 0; i < numberOfTiles; i++){
   parent.appendChild(tile);
 }
 
-let order = [];
-let playerOrder = [];
-let flash;
-let turn;
-let good;
-let compTurn;
-let intervalId;
-let strict = false;
-let noise = true;
-let on = false;
-let win;
+
 
 const turnCounter = document.querySelector("#turn");
 const slices = [...document.querySelectorAll(".slice")];
@@ -83,7 +84,6 @@ onButton.addEventListener("click", (event) => {
     turnCounter.innerHTML = "";
     clearColor();
     clearInterval(intervalId);
-    window.location.reload(false);
   }
 });
 
@@ -180,7 +180,7 @@ function check() {
     setTimeout(() => {
       turnCounter.innerHTML = turn;
       clearColor();
-
+      clearInterval(intervalId);
       if (strict) {
         play();
       } else {
@@ -191,8 +191,6 @@ function check() {
         intervalId = setInterval(gameTurn, 800);
       }
     }, 800);
-
-    noise = false;
   }
 
   if (turn == playerOrder.length && good && !win) {
